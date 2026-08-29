@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Position Quest — learn CSS position by playing</title>
+<meta name="description" content="A blueprint-themed game that teaches CSS position: relative, absolute, fixed and z-index. Clear 10 drafting levels to get certified.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sheet-head">
+  <div>
+    <p class="eyebrow">TechWebster Field Manual · css-positions.techwebster.com</p>
+    <h1>POSITION QUEST</h1>
+    <p class="sub">Ten drafts. One rule: land the hero on the mark. You'll learn <code>position</code> by moving things — not by reading about moving things.</p>
+  </div>
+  <div class="titleblock" aria-hidden="true">
+    <span>Project</span><b>css-positions</b>
+    <span>Sheet</span><b id="sheet-no">01 / 10</b>
+    <span>Drawn by</span><b>You</b>
+  </div>
+</header>
+
+<main>
+  <section class="board-col">
+    <div class="hud">
+      <h2 id="lv-name">Draft 01</h2>
+      <span id="meter" class="meter" title="Distance from hero to mark">Δ —</span>
+    </div>
+    <p id="lv-brief" class="brief"></p>
+
+    <div id="board" class="board">
+      <div id="deco"></div>
+      <div id="target"><span class="tag">MARK</span></div>
+      <div id="hero"><span>YOU</span></div>
+      <div id="confetti" aria-hidden="true"></div>
+      <div id="win" class="win" hidden>
+        <p class="win-big">Draft approved</p>
+        <p class="win-sub" id="win-sub">The foreman is pleased.</p>
+        <button id="next-btn" class="btn btn-amber">Next draft →</button>
+      </div>
+    </div>
+
+    <div class="level-chips" id="chips" role="tablist" aria-label="Levels"></div>
+
+    <div class="tools">
+      <button id="reset-btn" class="btn">Reset draft</button>
+      <button id="hint-btn" class="btn">Show hint</button>
+      <button id="cheat-btn" class="btn">Cheat sheet</button>
+    </div>
+    <p id="hint" class="hint" hidden></p>
+  </section>
+
+  <section class="editor-col">
+    <label class="ed-label" for="editor">your.css <span class="ed-scope">applies to #hero</span></label>
+    <textarea id="editor" spellcheck="false" autocapitalize="off" autocorrect="off"
+      placeholder="/* write CSS here, e.g.
+position: relative;
+left: 40px; */"></textarea>
+    <p class="ed-note">Live preview — every keystroke moves the hero. The draft is approved when the hero covers the mark.</p>
+  </section>
+</main>
+
+<dialog id="cheat" class="cheat">
+  <h2>Position cheat sheet</h2>
+  <dl>
+    <dt><code>position: static;</code></dt>
+    <dd>Default. The box sits in normal flow — <code>top / right / bottom / left</code> do nothing.</dd>
+    <dt><code>position: relative;</code></dt>
+    <dd>Offset from where it <em>would</em> be. Flow keeps its original space. Enables <code>z-index</code> and acts as the anchor for absolute children.</dd>
+    <dt><code>position: absolute;</code></dt>
+    <dd>Removed from flow. Anchored to the nearest <em>positioned</em> ancestor (else the page). <code>top/right/bottom/left</code> measure from that ancestor's edges.</dd>
+    <dt><code>position: fixed;</code></dt>
+    <dd>Removed from flow. Anchored to the <em>viewport</em> — ignores scrolling entirely.</dd>
+    <dt><code>position: sticky;</code></dt>
+    <dd>Relative until it crosses a scroll threshold (<code>top: 0</code> etc.), then it sticks, within its parent.</dd>
+    <dt><code>z-index</code></dt>
+    <dd>Stacking order — but only on positioned (non-static) elements. Higher paints on top.</dd>
+    <dt>Tricks</dt>
+    <dd>Center anything: <code>position:absolute; inset:0; margin:auto;</code> or <code>left:50%; top:50%; transform:translate(-50%,-50%);</code></dd>
+  </dl>
+  <form method="dialog"><button class="btn btn-amber">Back to the board</button></form>
+</dialog>
+
+<style id="level-css"></style>
+<style id="user-css"></style>
+<script src="game.js"></script>
+</body>
+</html>
