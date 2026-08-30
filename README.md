@@ -15,7 +15,7 @@ Write real CSS in a live editor to land a "hero" box on a target mark across 10 
 9. Negative offsets + `calc()`
 10. Boss: fixed + centered
 
-Progress is saved in `localStorage`. Includes a per-level hint system and a position cheat sheet.
+Progress is saved in `localStorage`. Includes a per-level hint system, a position cheat sheet, close-range target glow, WebAudio sound effects (mutable), per-level edit stats, and anti-cheese validation (oversized or invisible heroes don't count).
 
 ## Run
 

@@ -119,9 +119,11 @@ const LEVELS = [
 ];
 
 const DONE_KEY = "pq-done";
+const MUTE_KEY = "pq-mute";
 const done = new Set(JSON.parse(localStorage.getItem(DONE_KEY) || "[]"));
 let current = 0;
 let locked = false;
+let edits = 0;
 
 /* ---------- progress ---------- */
 const unlockedMax = () => {
@@ -165,6 +167,8 @@ function loadLevel(i) {
   editor.value = lv.start;
   applyCSS();
   check();
+  target.classList.remove("near");
+  edits = 0;
   winPanel.hidden = true;
   hintEl.hidden = true;
   renderChips();
@@ -196,18 +200,26 @@ function check() {
   const t = target.getBoundingClientRect();
   if (h.width === 0 || h.height === 0) return updateMeter(null);
 
-  const overlap = rectsOverlap(h, t);
   const hc = { x: h.left + h.width / 2, y: h.top + h.height / 2 };
   const tc = { x: t.left + t.width / 2, y: t.top + t.height / 2 };
   const dist = Math.round(Math.hypot(hc.x - tc.x, hc.y - tc.y));
   updateMeter(dist);
+  target.classList.toggle("near", dist < 25);
 
+  const overlap = rectsOverlap(h, t);
   if (locked || overlap < 0.6) return;
+
+  // anti-cheese: hero must be roughly mark-sized and actually rendered
+  if ((h.width * h.height) / (t.width * t.height) > 1.6) return;
+  const cs = getComputedStyle(hero);
+  if (cs.visibility === "hidden" || parseFloat(cs.opacity) < 0.1) return;
+
   if (lv.zAbove !== undefined && zOf(hero) <= lv.zAbove) return;
   if (lv.zBelow !== undefined && zOf(hero) >= lv.zBelow) return;
 
   // approved!
   locked = true;
+  target.classList.remove("near");
   done.add(current);
   saveProgress();
   renderChips();
@@ -216,6 +228,11 @@ function check() {
       ? "All 10 drafts cleared — you're a certified positioner."
       : ["The foreman is pleased.", "Clean lines. Next sheet.", "That's how a pro anchors.", "Nailed the coordinates."][current % 4];
   winPanel.hidden = false;
+  $("#win-stats").textContent =
+    "Cleared in " + edits + (edits === 1 ? " edit" : " edits") +
+    (edits <= 6 ? " — first-draft quality." : edits <= 15 ? " — solid drafting." : " — the foreman has seen smoother.");
+  chime();
+  confetti();
   $("#next-btn").textContent = current === LEVELS.length - 1 ? "Play again ↺" : "Next draft →";
   confetti();
 }
@@ -229,6 +246,23 @@ function updateMeter(dist) {
   meter.textContent = "Δ " + dist + "px";
   meter.classList.toggle("hot", dist < 40);
 }
+
+/* ---------- sound (WebAudio, no assets) ---------- */
+let audioCtx;
+const muted = () => localStorage.getItem(MUTE_KEY) === "1";
+function tone(freq, start, dur, type = "sine", gain = 0.06) {
+  if (muted()) return;
+  audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = type;
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(gain, audioCtx.currentTime + start);
+  g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + start + dur);
+  o.connect(g).connect(audioCtx.destination);
+  o.start(audioCtx.currentTime + start);
+  o.stop(audioCtx.currentTime + start + dur);
+}
+const chime = () => { tone(523, 0, 0.18); tone(659, 0.1, 0.18); tone(784, 0.2, 0.3); };
 
 /* ---------- confetti ---------- */
 function confetti() {
@@ -248,6 +282,7 @@ function confetti() {
 /* ---------- events ---------- */
 let timer;
 editor.addEventListener("input", () => {
+  edits++;
   applyCSS();
   clearTimeout(timer);
   timer = setTimeout(check, 220);
@@ -273,9 +308,15 @@ $("#hint-btn").addEventListener("click", () => {
   hintEl.hidden = !hintEl.hidden;
 });
 $("#cheat-btn").addEventListener("click", () => $("#cheat").showModal());
+$("#mute-btn").addEventListener("click", (e) => {
+  const next = muted() ? "0" : "1";
+  localStorage.setItem(MUTE_KEY, next);
+  e.currentTarget.textContent = next === "1" ? "🔇 Sound off" : "🔊 Sound on";
+});
 $("#next-btn").addEventListener("click", () =>
   loadLevel(current === LEVELS.length - 1 ? 0 : current + 1)
 );
 
 /* ---------- boot ---------- */
+$("#mute-btn").textContent = muted() ? "🔇 Sound off" : "🔊 Sound on";
 loadLevel(Math.min(unlockedMax(), LEVELS.length - 1));

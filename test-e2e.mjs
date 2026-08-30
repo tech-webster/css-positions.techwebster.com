@@ -26,6 +26,21 @@ ok((await page.locator(".chip").count()) === 10, "10 level chips rendered");
 ok(await page.locator("#lv-name").textContent() !== "", "level 1 title shown");
 ok((await errors.length) === 0, "no console/page errors on boot");
 
+console.log("— anti-cheese guards —");
+// size cheese: a huge hero would geometrically cover the mark — must be rejected
+await page.fill("#editor", "width:400px; height:400px;");
+await page.waitForTimeout(400);
+ok(!(await winVisible()), "oversized hero rejected (size guard)");
+// invisibility cheese: rect still overlaps when hidden — must be rejected
+await page.fill("#editor", "position:relative; left:55%; top:55%; visibility:hidden;");
+await page.waitForTimeout(400);
+ok(!(await winVisible()), "visibility:hidden rejected (render guard)");
+await page.fill("#editor", "position:relative; left:55%; top:55%; opacity:0;");
+await page.waitForTimeout(400);
+ok(!(await winVisible()), "opacity:0 rejected (render guard)");
+ok((await page.locator("#win-stats").count()) === 1, "edit stats element present");
+await page.fill("#editor", "");
+
 console.log("— solving levels —");
 async function solve(css) {
   await page.fill("#editor", css);
