@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to the drafting board</a>
 
 <header class="sheet-head">
   <div>
@@ -25,7 +26,13 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
+  <div class="progress-strip" aria-label="Course progress">
+    <span class="progress-label">Certification progress</span>
+    <strong id="progress-count">0 / 10 cleared</strong>
+    <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+    <span id="best-score" class="progress-best">Best run —</span>
+  </div>
   <section class="board-col">
     <div class="hud">
       <h2 id="lv-name">Draft 01</h2>
@@ -33,12 +40,12 @@
     </div>
     <p id="lv-brief" class="brief"></p>
 
-    <div id="board" class="board">
+    <div id="board" class="board" aria-describedby="lv-brief">
       <div id="deco"></div>
       <div id="target"><span class="tag">MARK</span></div>
       <div id="hero"><span>YOU</span></div>
       <div id="confetti" aria-hidden="true"></div>
-      <div id="win" class="win" hidden>
+      <div id="win" class="win" role="status" aria-live="polite" hidden>
         <p class="win-big">Draft approved</p>
         <p class="win-sub" id="win-sub">The foreman is pleased.</p>
         <p class="win-stats" id="win-stats"></p>
@@ -53,17 +60,19 @@
       <button id="hint-btn" class="btn">Show hint</button>
       <button id="cheat-btn" class="btn">Cheat sheet</button>
       <button id="mute-btn" class="btn">🔊 Sound on</button>
+      <button id="clear-progress-btn" class="btn btn-danger">Clear progress</button>
     </div>
-    <p id="hint" class="hint" hidden></p>
+    <p id="hint" class="hint" aria-live="polite" hidden></p>
+    <p id="announcement" class="sr-only" aria-live="assertive"></p>
   </section>
 
   <section class="editor-col">
     <label class="ed-label" for="editor">your.css <span class="ed-scope">applies to #hero</span></label>
-    <textarea id="editor" spellcheck="false" autocapitalize="off" autocorrect="off"
+    <textarea id="editor" aria-label="CSS editor for the hero" aria-describedby="editor-note" spellcheck="false" autocapitalize="off" autocorrect="off"
       placeholder="/* write CSS here, e.g.
 position: relative;
 left: 40px; */"></textarea>
-    <p class="ed-note">Live preview — every keystroke moves the hero. The draft is approved when the hero covers the mark.</p>
+    <p class="ed-note" id="editor-note">Live preview — every keystroke moves the hero. The draft is approved when the hero covers the mark.</p>
   </section>
 </main>
 

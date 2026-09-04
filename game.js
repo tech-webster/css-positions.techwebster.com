@@ -12,6 +12,10 @@ const levelStyle = $("#level-css");
 const meter = $("#meter");
 const winPanel = $("#win");
 const hintEl = $("#hint");
+const announcement = $("#announcement");
+const progressCount = $("#progress-count");
+const progressFill = $("#progress-fill");
+const bestScoreEl = $("#best-score");
 
 const LEVELS = [
   {
@@ -120,7 +124,19 @@ const LEVELS = [
 
 const DONE_KEY = "pq-done";
 const MUTE_KEY = "pq-mute";
-const done = new Set(JSON.parse(localStorage.getItem(DONE_KEY) || "[]"));
+const BEST_KEY = "pq-best-edits";
+function readJSON(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "null");
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
+}
+const storedDone = readJSON(DONE_KEY, []);
+const done = new Set(Array.isArray(storedDone) ? storedDone.map(Number).filter(Number.isInteger) : []);
+const storedBest = readJSON(BEST_KEY, {});
+const bestEdits = storedBest && typeof storedBest === "object" && !Array.isArray(storedBest) ? storedBest : {};
 let current = 0;
 let locked = false;
 let edits = 0;
@@ -133,7 +149,16 @@ const unlockedMax = () => {
 };
 
 function saveProgress() {
-  localStorage.setItem(DONE_KEY, JSON.stringify([...done]));
+  try { localStorage.setItem(DONE_KEY, JSON.stringify([...done])); } catch { /* private mode */ }
+}
+
+function renderProgress() {
+  const cleared = done.size;
+  const percent = Math.round((cleared / LEVELS.length) * 100);
+  progressCount.textContent = cleared + " / " + LEVELS.length + " cleared";
+  progressFill.style.width = percent + "%";
+  const scores = Object.values(bestEdits).filter(Number.isFinite);
+  bestScoreEl.textContent = scores.length ? "Best edits " + Math.min(...scores) : "Best run —";
 }
 
 function renderChips() {
@@ -172,6 +197,7 @@ function loadLevel(i) {
   winPanel.hidden = true;
   hintEl.hidden = true;
   renderChips();
+  renderProgress();
   editor.focus();
 }
 
@@ -222,7 +248,13 @@ function check() {
   target.classList.remove("near");
   done.add(current);
   saveProgress();
+  if (!Number.isFinite(bestEdits[current]) || edits < bestEdits[current]) {
+    bestEdits[current] = edits;
+    try { localStorage.setItem(BEST_KEY, JSON.stringify(bestEdits)); } catch { /* private mode */ }
+  }
   renderChips();
+  renderProgress();
+  announcement.textContent = "Draft " + (current + 1) + " approved in " + edits + " " + (edits === 1 ? "edit" : "edits") + ".";
   $("#win-sub").textContent =
     current === LEVELS.length - 1
       ? "All 10 drafts cleared — you're a certified positioner."
@@ -306,6 +338,7 @@ $("#reset-btn").addEventListener("click", () => {
 $("#hint-btn").addEventListener("click", () => {
   hintEl.textContent = LEVELS[current].hint;
   hintEl.hidden = !hintEl.hidden;
+  if (!hintEl.hidden) announcement.textContent = "Hint shown.";
 });
 $("#cheat-btn").addEventListener("click", () => $("#cheat").showModal());
 $("#mute-btn").addEventListener("click", (e) => {
@@ -316,7 +349,19 @@ $("#mute-btn").addEventListener("click", (e) => {
 $("#next-btn").addEventListener("click", () =>
   loadLevel(current === LEVELS.length - 1 ? 0 : current + 1)
 );
+$("#clear-progress-btn").addEventListener("click", () => {
+  if (!confirm("Clear all completed drafts and best scores?")) return;
+  done.clear();
+  Object.keys(bestEdits).forEach((key) => delete bestEdits[key]);
+  try {
+    localStorage.removeItem(DONE_KEY);
+    localStorage.removeItem(BEST_KEY);
+  } catch { /* private mode */ }
+  loadLevel(0);
+  announcement.textContent = "Progress cleared. Starting again from Draft 01.";
+});
 
 /* ---------- boot ---------- */
 $("#mute-btn").textContent = muted() ? "🔇 Sound off" : "🔊 Sound on";
 loadLevel(Math.min(unlockedMax(), LEVELS.length - 1));
+renderProgress();

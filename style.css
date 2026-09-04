@@ -16,6 +16,32 @@
 
 * { box-sizing: border-box; }
 
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  transform: translateY(-180%);
+  padding: 8px 12px;
+  background: var(--amber);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+.skip-link:focus { transform: translateY(0); }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -106,6 +132,28 @@ main {
   gap: 32px;
   align-items: start;
 }
+.progress-strip {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto auto minmax(120px, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-block: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.progress-label { color: var(--ink-dim); text-transform: uppercase; letter-spacing: .08em; }
+.progress-strip strong { color: var(--amber); white-space: nowrap; }
+.progress-track { height: 6px; background: rgba(122, 167, 210, .16); }
+#progress-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--amber);
+  transition: width .35s ease-out;
+}
+.progress-best { color: var(--cyan); white-space: nowrap; }
 @media (max-width: 900px) {
   main { grid-template-columns: 1fr; }
 }
@@ -312,6 +360,8 @@ main {
 .btn:active { transform: translateY(1px); }
 .btn-amber { background: var(--amber); border-color: var(--amber); color: var(--bg); }
 .btn-amber:hover { background: #ffd97e; color: var(--bg); }
+.btn-danger { color: var(--red); }
+.btn-danger:hover { border-color: var(--red); color: var(--red); }
 
 .hint {
   font-family: var(--font-mono);
@@ -383,4 +433,8 @@ main {
   .board { height: 340px; }
   .editor-col { position: static; }
   #editor { height: 240px; }
+  .progress-strip { grid-template-columns: 1fr auto; }
+  .progress-label { grid-column: 1 / 2; }
+  .progress-track { grid-column: 1 / -1; grid-row: 2; }
+  .progress-best { grid-column: 2; grid-row: 1; }
 }
