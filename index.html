@@ -88,23 +88,24 @@
 <main id="main-content" class="landing-hero">
   <section class="hero-copy" aria-labelledby="landing-title">
     <p class="eyebrow">Position Quest / by TechWebster</p>
-    <h1 id="landing-title">A little CSS.<br>A big <span>move.</span></h1>
-    <h2>Learn CSS position by playing.</h2>
+    <h1 id="landing-title">Learn CSS<br>positioning.<span class="typing-line" aria-hidden="true">By playing.</span></h1>
+    <h2>A free, interactive CSS positioning game.</h2>
     <p class="hero-description">Turn positioning theory into something you can see. Write real CSS, move your box onto the target, and work your way through 10 hands-on challenges.</p>
     <p class="hero-topics">Relative. Absolute. Fixed. <code>z-index</code>.<br>One playground to put them all into practice.</p>
     <a class="play-cta" href="play/">Play game <span aria-hidden="true">↗</span></a>
     <p class="play-note">Free to play · No sign-up · Progress saved in your browser</p>
   </section>
   <figure class="hero-preview" aria-label="CSS positioning example: move a box from its starting position onto an orange target">
-    <div class="preview-bar"><span>THE PLAYGROUND</span><span>01 / 10</span></div>
+    <div class="preview-bar"><span>THE PLAYGROUND</span><button class="preview-toggle" type="button" hidden>Pause animation</button></div>
     <div class="preview-grid" aria-hidden="true">
-      <span class="preview-origin">YOU</span><span class="preview-path"></span>
+      <span class="preview-origin">YOU</span>
       <span class="preview-target"><span>LAND HERE</span>＋</span>
-      <span class="preview-caption">Every property makes a move.</span>
+      <span class="preview-caption">Watch the offsets move the box.</span>
     </div>
-    <figcaption><code><span>position</span>: relative;<br><span>left</span>: 160px;<br><span>top</span>: 80px;</code><span class="preview-live">YOUR NEXT MOVE ↗</span></figcaption>
+    <figcaption><code><span>position</span>: relative;<br><span>left</span>: <b id="demo-left">0</b>px;<br><span>top</span>: <b id="demo-top">0</b>px;</code><span class="preview-live">YOUR NEXT MOVE ↗</span></figcaption>
   </figure>
 </main>
 <footer class="site-footer"><div><strong>Built by TechWebster.</strong><span>Full-stack software studio · Web, mobile &amp; desktop.</span></div><div class="footer-links"><a href="https://www.techwebster.com/">Meet the studio ↗</a><a href="https://www.techwebster.com/products/code-editor">Code Editor ↗</a></div></footer>
+<script src="landing.js" defer></script>
 </body>
 </html>

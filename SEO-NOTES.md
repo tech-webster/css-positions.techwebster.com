@@ -15,3 +15,5 @@ After deployment: verify the production canonical, asset responses and absence o
 ## Landing and gameplay routes
 
 The homepage now contains the product hero, a static CSS illustration, Play game link, and studio footer. It loads no game JavaScript. Gameplay lives at /play/ with a self-canonical URL, an updated application URL in JSON-LD, and a return link. Both URLs are in the sitemap. The landing page retains crawlable product copy; splitting the pages does not itself guarantee higher rankings. Desktop and mobile navigation, direct gameplay reload, and all 25 gameplay checks passed.
+
+Hero motion: the crawlable heading is “Learn CSS positioning.” A decorative typing line rotates learning phrases; screen readers receive the stable heading. The offset preview synchronizes numeric values and box transforms, pauses in hidden tabs, supports a pause button, and stops for reduced-motion preferences. No animation library is loaded. Verified value/transform agreement, pause/resume, reduced-motion behavior, mobile layout, and landing-to-game navigation.
