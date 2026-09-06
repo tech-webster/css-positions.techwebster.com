@@ -8,6 +8,10 @@ Primary topic: CSS positioning game. Supporting topics: learn CSS position, inte
 
 Implemented: self-canonical product URL, description, social metadata and preview image, linked Organization/WebSite/WebApplication/WebPage JSON-LD, visible educational content, links to company/products/code editor, robots.txt and sitemap.xml. No invented reviews, ratings or certifications in schema.
 
-Validation: serve with python3 -m http.server 8000, then TEST_URL=http://localhost:8000 node test-e2e.mjs. HTTP is required for local font loading. Browser checks cover desktop/mobile overflow, font loading and JSON-LD parsing. No field Core Web Vitals or ranking improvements are claimed.
+Validation: serve with python3 -m http.server 8000, then TEST_URL=http://localhost:8000/play/ node test-e2e.mjs. HTTP is required for local font loading. Browser checks cover desktop/mobile overflow, font loading and JSON-LD parsing. No field Core Web Vitals or ranking improvements are claimed.
 
 After deployment: verify the production canonical, asset responses and absence of noindex headers; submit https://css-positions.techwebster.com/sitemap.xml in Search Console and inspect the homepage. Add Position Quest to the main company products hub and link to this subdomain from a dedicated product page. That company-site change is outside this repository. Monitor actual search queries before expanding content.
+
+## Landing and gameplay routes
+
+The homepage now contains the product hero, a static CSS illustration, Play game link, and studio footer. It loads no game JavaScript. Gameplay lives at /play/ with a self-canonical URL, an updated application URL in JSON-LD, and a return link. Both URLs are in the sitemap. The landing page retains crawlable product copy; splitting the pages does not itself guarantee higher rankings. Desktop and mobile navigation, direct gameplay reload, and all 25 gameplay checks passed.

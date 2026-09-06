@@ -460,3 +460,37 @@ h1 { font-weight: 800; letter-spacing: -.045em; }
 .site-footer { border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 13px; }
 :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
 @media (max-width: 600px) { .concepts { grid-template-columns: 1fr; gap: 8px; } .brand-nav img { width: 145px; } .brand-nav, .site-footer { flex-wrap: wrap; } }
+
+/* Landing: a single invitation to play, framed by the company brand. */
+.landing-page { display: flex; flex-direction: column; min-height: 100svh; }
+.landing-page .brand-nav, .landing-page .site-footer { width: 100%; }
+.landing-hero { flex: 1; width: 100%; padding: 64px 24px; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 60px; }
+.hero-copy .eyebrow { color: var(--amber); letter-spacing: .1em; margin-bottom: 24px; }
+.hero-copy h1 { font-size: clamp(58px, 6.6vw, 84px); line-height: .98; letter-spacing: -.065em; }
+.hero-copy h1::after { display: none; }
+.hero-copy h1 span { color: var(--amber); }
+.hero-copy h2 { font-size: 22px; line-height: 1.3; letter-spacing: -.025em; margin: 28px 0 14px; }
+.hero-description { color: var(--ink-dim); font-size: 16px; max-width: 47ch; }
+.hero-topics { font-size: 14px; color: var(--ink-dim); line-height: 1.8; margin: 22px 0 28px; }
+.play-cta { display: inline-flex; gap: 64px; align-items: center; background: var(--amber); color: var(--bg); padding: 15px 22px; font-size: 17px; font-weight: 700; text-decoration: none; border-radius: 5px; transition: background .15s; }
+.play-cta:hover { background: #ff9b38; }
+.play-note { font-size: 12px; color: var(--ink-dim); margin-top: 15px; }
+.hero-preview { margin: 0; min-width: 0; border: 1px solid var(--line); background: #101010; box-shadow: 12px 12px 0 #171717; }
+.preview-bar { display: flex; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); font: 11px var(--font-mono); color: var(--ink-dim); }
+.preview-bar span:last-child { color: var(--amber); }
+.preview-grid { height: 300px; position: relative; background: linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0 / 24px 24px; }
+.preview-origin { position: absolute; top: 54px; left: 40px; width: 60px; height: 60px; border: 1px solid var(--ink); display: grid; place-items: center; font: 11px var(--font-mono); background: #fafafa0d; }
+.preview-path { position: absolute; left: 100px; top: 84px; width: calc(65% - 100px); height: 80px; border-top: 1px dashed #ffffff55; border-right: 1px dashed #ffffff55; }
+.preview-target { position: absolute; left: calc(65% - 30px); top: 134px; width: 60px; height: 60px; border: 1px dashed var(--amber); color: var(--amber); background: #ff7f0012; display: grid; place-items: center; font-size: 36px; }
+.preview-target span { position: absolute; top: -25px; white-space: nowrap; font: 10px var(--font-mono); }
+.preview-caption { position: absolute; bottom: 24px; left: 24px; color: var(--ink-dim); font: 11px var(--font-mono); }
+.hero-preview figcaption { padding: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: end; gap: 8px; }
+.hero-preview code { font: 13px/1.8 var(--font-mono); }
+.hero-preview code span { color: var(--amber); }
+.preview-live { color: var(--ink-dim); font: 9px var(--font-mono); white-space: nowrap; }
+.landing-page .site-footer { align-items: center; }
+.landing-page .site-footer strong, .landing-page .site-footer span { display: block; }
+.landing-page .site-footer strong { color: var(--ink); margin-bottom: 5px; font-weight: 500; }
+.footer-links { display: flex; gap: 24px; }
+@media (max-width: 900px) { .landing-hero { gap: 32px; grid-template-columns: 1fr 1fr; } .preview-live { display: none; } }
+@media (max-width: 700px) { .landing-hero { grid-template-columns: 1fr; padding-top: 40px; padding-bottom: 40px; } .hero-copy h1 { font-size: clamp(56px, 12vw, 78px); } .hero-preview { max-width: 480px; width: 100%; } .preview-grid { height: 250px; } .landing-page .site-footer { gap: 20px; } }

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play Position Quest — CSS Challenges | TechWebster</title>
+<meta name="description" content="Learn CSS positioning with Position Quest by TechWebster. Practice relative, absolute, fixed and z-index in 10 free interactive coding challenges.">
+<link rel="canonical" href="https://css-positions.techwebster.com/play/">
+<meta name="theme-color" content="#FF7F00">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="TechWebster">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Position Quest by TechWebster">
+<meta property="og:title" content="CSS Position Game — Position Quest by TechWebster">
+<meta property="og:description" content="Learn CSS positioning with Position Quest by TechWebster. Practice relative, absolute, fixed and z-index in 10 free interactive coding challenges.">
+<meta property="og:url" content="https://css-positions.techwebster.com/play/">
+<meta property="og:image" content="https://css-positions.techwebster.com/assets/social-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Position Quest by TechWebster — learn CSS position by playing">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Position Quest by TechWebster">
+<meta name="twitter:description" content="Learn CSS positioning with Position Quest by TechWebster. Practice relative, absolute, fixed and z-index in 10 free interactive coding challenges.">
+<meta name="twitter:image" content="https://css-positions.techwebster.com/assets/social-preview.png">
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.techwebster.com/#organization",
+      "name": "TechWebster",
+      "url": "https://www.techwebster.com/",
+      "logo": "https://www.techwebster.com/logo-white.svg"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://css-positions.techwebster.com/#website",
+      "name": "Position Quest by TechWebster",
+      "url": "https://css-positions.techwebster.com/",
+      "publisher": {
+        "@id": "https://www.techwebster.com/#organization"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://css-positions.techwebster.com/#app",
+      "name": "Position Quest",
+      "url": "https://css-positions.techwebster.com/play/",
+      "description": "Learn CSS positioning with Position Quest by TechWebster. Practice relative, absolute, fixed and z-index in 10 free interactive coding challenges.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "inLanguage": "en",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://www.techwebster.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://css-positions.techwebster.com/play/#webpage",
+      "url": "https://css-positions.techwebster.com/play/",
+      "name": "Play Position Quest \u2014 TechWebster",
+      "isPartOf": {
+        "@id": "https://css-positions.techwebster.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://css-positions.techwebster.com/#app"
+      }
+    }
+  ]
+}</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to the drafting board</a>
+
+<nav class="brand-nav" aria-label="TechWebster">
+  <a href="https://www.techwebster.com/" aria-label="TechWebster home"><img src="../assets/techwebster-logo.svg" width="180" height="38" alt="TechWebster"></a>
+  <a href="../">← Back to Position Quest</a>
+</nav>
+<header class="sheet-head">
+  <div>
+    <p class="eyebrow">A coding playground by TechWebster</p>
+    <h1>Position Quest<span class="heading-sub">Learn CSS position by playing.</span></h1>
+    <p class="sub">A free CSS positioning game for students and frontend beginners. Write real CSS to move the hero onto the mark through ten interactive challenges.</p>
+  </div>
+  <div class="titleblock" aria-hidden="true">
+    <span>Project</span><b>css-positions</b>
+    <span>Sheet</span><b id="sheet-no">01 / 10</b>
+    <span>Drawn by</span><b>You</b>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="progress-strip" aria-label="Course progress">
+    <span class="progress-label">Certification progress</span>
+    <strong id="progress-count">0 / 10 cleared</strong>
+    <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+    <span id="best-score" class="progress-best">Best run —</span>
+  </div>
+  <section class="board-col">
+    <div class="hud">
+      <h2 id="lv-name">Draft 01</h2>
+      <span id="meter" class="meter" title="Distance from hero to mark">Δ —</span>
+    </div>
+    <p id="lv-brief" class="brief">Start with relative positioning: use CSS offsets to move the hero onto the mark.</p>
+
+    <div id="board" class="board" aria-describedby="lv-brief">
+      <div id="deco"></div>
+      <div id="target"><span class="tag">MARK</span></div>
+      <div id="hero"><span>YOU</span></div>
+      <div id="confetti" aria-hidden="true"></div>
+      <div id="win" class="win" role="status" aria-live="polite" hidden>
+        <p class="win-big">Draft approved</p>
+        <p class="win-sub" id="win-sub">The foreman is pleased.</p>
+        <p class="win-stats" id="win-stats"></p>
+        <button id="next-btn" class="btn btn-amber">Next draft →</button>
+      </div>
+    </div>
+
+    <div class="level-chips" id="chips" role="tablist" aria-label="Levels"></div>
+
+    <div class="tools">
+      <button id="reset-btn" class="btn">Reset draft</button>
+      <button id="hint-btn" class="btn">Show hint</button>
+      <button id="cheat-btn" class="btn">Cheat sheet</button>
+      <button id="mute-btn" class="btn">🔊 Sound on</button>
+      <button id="clear-progress-btn" class="btn btn-danger">Clear progress</button>
+    </div>
+    <p id="hint" class="hint" aria-live="polite" hidden></p>
+    <p id="announcement" class="sr-only" aria-live="assertive"></p>
+  </section>
+
+  <section class="editor-col">
+    <label class="ed-label" for="editor">your.css <span class="ed-scope">applies to #hero</span></label>
+    <textarea id="editor" aria-label="CSS editor for the hero" aria-describedby="editor-note" spellcheck="false" autocapitalize="off" autocorrect="off"
+      placeholder="/* write CSS here, e.g.
+position: relative;
+left: 40px; */"></textarea>
+    <p class="ed-note" id="editor-note">Live preview — every keystroke moves the hero. The draft is approved when the hero covers the mark.</p>
+  </section>
+  <noscript><p>The game needs JavaScript. Enable it to play Position Quest.</p></noscript>
+</main>
+<footer class="site-footer"><span>Position Quest · A TechWebster product</span><a href="https://www.techwebster.com/">Meet the studio <span aria-hidden="true">↗</span></a></footer>
+
+<dialog id="cheat" class="cheat">
+  <h2>Position cheat sheet</h2>
+  <dl>
+    <dt><code>position: static;</code></dt>
+    <dd>Default. The box sits in normal flow — <code>top / right / bottom / left</code> do nothing.</dd>
+    <dt><code>position: relative;</code></dt>
+    <dd>Offset from where it <em>would</em> be. Flow keeps its original space. Enables <code>z-index</code> and acts as the anchor for absolute children.</dd>
+    <dt><code>position: absolute;</code></dt>
+    <dd>Removed from flow. Anchored to the nearest <em>positioned</em> ancestor (else the page). <code>top/right/bottom/left</code> measure from that ancestor's edges.</dd>
+    <dt><code>position: fixed;</code></dt>
+    <dd>Removed from flow. Usually anchored to the <em>viewport</em>. Certain ancestors, such as transformed elements, can establish its containing block instead.</dd>
+    <dt><code>position: sticky;</code></dt>
+    <dd>Relative until it crosses a scroll threshold (<code>top: 0</code> etc.), then it sticks, within its parent.</dd>
+    <dt><code>z-index</code></dt>
+    <dd>Stacking order within a stacking context. Works on positioned elements and flex or grid items; higher values paint above lower ones in the same context.</dd>
+    <dt>Tricks</dt>
+    <dd>Center anything: <code>position:absolute; inset:0; margin:auto;</code> or <code>left:50%; top:50%; transform:translate(-50%,-50%);</code></dd>
+  </dl>
+  <form method="dialog"><button class="btn btn-amber">Back to the board</button></form>
+</dialog>
+
+<style id="level-css"></style>
+<style id="user-css"></style>
+<script src="../game.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@ import { createRequire } from "module";
 const require = createRequire("/Users/ashirbadpanigrahi/.npm/_npx/9833c18b2d85bc59/node_modules/");
 const { chromium } = require("playwright");
 
-const url = process.env.TEST_URL || "http://localhost:8000/";
+const url = process.env.TEST_URL || "http://localhost:8000/play/";
 const errors = [];
 let pass = 0, fail = 0;
 const ok = (cond, label) => {
