@@ -299,7 +299,7 @@ const chime = () => { tone(523, 0, 0.18); tone(659, 0.1, 0.18); tone(784, 0.2, 0
 /* ---------- confetti ---------- */
 function confetti() {
   const c = $("#confetti");
-  const colors = ["#ffc94d", "#7fd1ff", "#ff6b6b", "#9ef0c0"];
+  const colors = ["#ff7f00", "#fafafa", "#ff9b38", "#a8a8ad"];
   for (let i = 0; i < 42; i++) {
     const s = document.createElement("i");
     s.style.left = Math.random() * 100 + "%";
