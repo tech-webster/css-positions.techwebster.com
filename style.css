@@ -508,3 +508,26 @@ h1 { font-weight: 800; letter-spacing: -.045em; }
 @media (prefers-reduced-motion: reduce) { .typing-line::after { display: none; } }
 @media (max-width: 700px) { .hero-copy h1 { font-size: clamp(44px, 11vw, 64px); } }
 .preview-origin { background: #202020; }
+
+/* Gameplay keeps the goal, board and editor in view. */
+.game-page .brand-nav { padding-block: 16px; }
+.game-page .brand-nav img { width: 145px; }
+.game-heading { max-width: 1120px; margin: 0 auto; padding: 24px 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.game-heading h1 { font-size: 26px; letter-spacing: -.035em; }
+.game-heading h1::after { display: none; }
+.game-page main { padding-top: 16px; gap: 20px 28px; }
+.game-page .progress-strip { grid-template-columns: auto auto 1fr; padding: 8px 0; border-top: 0; }
+.game-page .brief { font-size: 14px; min-height: 3.1em; }
+.game-page .hud h2 { font-size: 14px; }
+.game-page .board, .game-page #editor { box-shadow: none; }
+.game-page .editor-col { padding-top: 0; }
+.game-page #editor { height: 440px; }
+.game-page .site-footer { padding-block: 16px; font-size: 12px; }
+.game-options { position: relative; }
+.game-options summary { list-style: none; }
+.game-options summary::-webkit-details-marker { display: none; }
+.game-options-panel { position: absolute; right: 0; bottom: calc(100% + 8px); z-index: 60; padding: 10px; background: var(--bg-2); border: 1px solid var(--line); display: grid; gap: 8px; min-width: 180px; }
+#help { max-width: 430px; }
+#help li { margin-bottom: 10px; }
+#help p { color: var(--ink-dim); font-size: 14px; }
+@media (max-width: 900px) { .game-page .progress-track { grid-column: auto; grid-row: auto; } .game-page #editor { height: 210px; } .game-page .board { height: 300px; } .game-heading h1 { font-size: 22px; } }

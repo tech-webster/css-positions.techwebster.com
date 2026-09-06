@@ -79,37 +79,28 @@
   ]
 }</script>
 </head>
-<body>
+<body class="game-page">
 <a class="skip-link" href="#main-content">Skip to the drafting board</a>
 
 <nav class="brand-nav" aria-label="TechWebster">
   <a href="https://www.techwebster.com/" aria-label="TechWebster home"><img src="../assets/techwebster-logo.svg" width="180" height="38" alt="TechWebster"></a>
   <a href="../">← Back to Position Quest</a>
 </nav>
-<header class="sheet-head">
-  <div>
-    <p class="eyebrow">A coding playground by TechWebster</p>
-    <h1>Position Quest<span class="heading-sub">Learn CSS position by playing.</span></h1>
-    <p class="sub">A free CSS positioning game for students and frontend beginners. Write real CSS to move the hero onto the mark through ten interactive challenges.</p>
-  </div>
-  <div class="titleblock" aria-hidden="true">
-    <span>Project</span><b>css-positions</b>
-    <span>Sheet</span><b id="sheet-no">01 / 10</b>
-    <span>Drawn by</span><b>You</b>
-  </div>
+<header class="game-heading">
+  <h1>Position Quest</h1>
+  <button id="help-btn" class="btn" type="button">How to play</button>
 </header>
-
 <main id="main-content">
   <div class="progress-strip" aria-label="Course progress">
-    <span class="progress-label">Certification progress</span>
+    <span class="progress-label">Levels</span>
     <strong id="progress-count">0 / 10 cleared</strong>
     <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
-    <span id="best-score" class="progress-best">Best run —</span>
+
   </div>
   <section class="board-col">
     <div class="hud">
       <h2 id="lv-name">Draft 01</h2>
-      <span id="meter" class="meter" title="Distance from hero to mark">Δ —</span>
+      <span id="meter" class="meter" title="Distance to target">Δ —</span>
     </div>
     <p id="lv-brief" class="brief">Start with relative positioning: use CSS offsets to move the hero onto the mark.</p>
 
@@ -119,38 +110,48 @@
       <div id="hero"><span>YOU</span></div>
       <div id="confetti" aria-hidden="true"></div>
       <div id="win" class="win" role="status" aria-live="polite" hidden>
-        <p class="win-big">Draft approved</p>
+        <p class="win-big">Level complete!</p>
         <p class="win-sub" id="win-sub">The foreman is pleased.</p>
         <p class="win-stats" id="win-stats"></p>
-        <button id="next-btn" class="btn btn-amber">Next draft →</button>
+        <button id="next-btn" class="btn btn-amber">Next level →</button>
       </div>
     </div>
 
     <div class="level-chips" id="chips" role="tablist" aria-label="Levels"></div>
 
     <div class="tools">
-      <button id="reset-btn" class="btn">Reset draft</button>
+      <button id="reset-btn" class="btn">Reset level</button>
       <button id="hint-btn" class="btn">Show hint</button>
       <button id="cheat-btn" class="btn">Cheat sheet</button>
-      <button id="mute-btn" class="btn">🔊 Sound on</button>
-      <button id="clear-progress-btn" class="btn btn-danger">Clear progress</button>
+      <details class="game-options"><summary class="btn">Settings</summary><div class="game-options-panel">
+        <button id="mute-btn" class="btn">🔊 Sound on</button>
+        <button id="clear-progress-btn" class="btn btn-danger">Clear progress</button>
+      </div></details>
     </div>
     <p id="hint" class="hint" aria-live="polite" hidden></p>
     <p id="announcement" class="sr-only" aria-live="assertive"></p>
   </section>
 
   <section class="editor-col">
-    <label class="ed-label" for="editor">your.css <span class="ed-scope">applies to #hero</span></label>
+    <label class="ed-label" for="editor">Write CSS <span class="ed-scope">Move YOU to MARK</span></label>
     <textarea id="editor" aria-label="CSS editor for the hero" aria-describedby="editor-note" spellcheck="false" autocapitalize="off" autocorrect="off"
       placeholder="/* write CSS here, e.g.
 position: relative;
 left: 40px; */"></textarea>
-    <p class="ed-note" id="editor-note">Live preview — every keystroke moves the hero. The draft is approved when the hero covers the mark.</p>
+    <p class="ed-note" id="editor-note">Changes run automatically. Cover MARK to finish the level.</p>
   </section>
   <noscript><p>The game needs JavaScript. Enable it to play Position Quest.</p></noscript>
 </main>
 <footer class="site-footer"><span>Position Quest · A TechWebster product</span><a href="https://www.techwebster.com/">Meet the studio <span aria-hidden="true">↗</span></a></footer>
 
+<dialog id="help" class="cheat" aria-labelledby="help-title">
+  <h2 id="help-title">How to play</h2>
+  <ol><li>Read the level goal.</li><li>Write CSS to move <strong>YOU</strong> onto <strong>MARK</strong>.</li><li>Cover the target to unlock the next level.</li></ol>
+  <p>Stuck? Use <strong>Show hint</strong> or the <strong>Cheat sheet</strong>.</p>
+  <p>Progress saves in this browser.</p>
+  <p id="best-score">Best run —</p>
+  <form method="dialog"><button class="btn btn-amber">Got it</button></form>
+</dialog>
 <dialog id="cheat" class="cheat">
   <h2>Position cheat sheet</h2>
   <dl>

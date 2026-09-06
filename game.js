@@ -19,105 +19,105 @@ const bestScoreEl = $("#best-score");
 
 const LEVELS = [
   {
-    name: "Draft 01 — Nudge",
+    name: "Level 01 — Nudge",
     brief:
-      "The hero sits in normal flow. Your first job: shift it onto the mark. <code>position: relative</code> offsets a box from where it would be — without disturbing the flow.",
+      "Move YOU to MARK with <code>position: relative</code>, <code>left</code> and <code>top</code>.",
     target: "left:55%; top:55%;",
     heroBase: "",
     deco: "",
-    start: "/* Land the hero on the mark.\n   Try position: relative; then left & top */\n",
+    start: "/* Try position: relative; left: ...; top: ...; */\n",
     hint: "position: relative;\nleft: ~55%; top: ~55%;  ← watch the live preview, tune it in",
   },
   {
-    name: "Draft 02 — Backwards",
+    name: "Level 02 — Backwards",
     brief:
-      "The hero starts far from the mark — and you'll need to move it <em>up and left</em>. Offsets can be negative: <code>top: -80px</code> pulls a box upward.",
+      "Move up and left. Use <code>position: relative</code> with negative offsets.",
     target: "left:6%; top:8%;",
     heroBase: "#hero{margin-left:48%;margin-top:210px;}",
     deco: "",
-    start: "/* Negative values are allowed.\n   position: relative; left: -...; top: -...; */\n",
+    start: "/* Use negative left and top values. */\n",
     hint: "position: relative;\nleft: -42%; top: -200px;  (tune it)",
   },
   {
-    name: "Draft 03 — Break free",
+    name: "Level 03 — Break free",
     brief:
-      "Relative offsets leave a hole behind. <code>position: absolute</code> removes the hero from the flow and anchors it to the nearest <em>positioned</em> ancestor — this drafting board. Grab the mark from the top-right corner.",
+      "Reach the top-right target. Use <code>position: absolute</code>, <code>top</code> and <code>right</code>.",
     target: "right:6%; top:8%;",
     heroBase: "",
     deco: '<div class="crate flow-crate">SUPPLY</div>',
-    start: "/* position: absolute; anchors to the board.\n   Pick your edges: top / right / bottom / left */\n",
+    start: "/* Try position: absolute; top: ...; right: ...; */\n",
     hint: "position: absolute;\ntop: 8%; right: 6%;",
   },
   {
-    name: "Draft 04 — Dead centre",
+    name: "Level 04 — Dead centre",
     brief:
-      "Classic interview question: centre a box in its parent. With <code>position: absolute</code>, set every edge (<code>inset: 0</code>) and let <code>margin: auto</code> split the leftover space.",
+      "Center YOU in the board with <code>position: absolute</code>, <code>inset</code> and <code>margin</code>.",
     target: "inset:0; margin:auto;",
     heroBase: "",
     deco: "",
-    start: "/* position: absolute;\n   inset: 0; margin: auto;   → dead centre\n   (or 50% + translate, your call) */\n",
+    start: "/* Try inset: 0; margin: auto; */\n",
     hint: "position: absolute;\ninset: 0; margin: auto;",
   },
   {
-    name: "Draft 05 — South-west anchor",
+    name: "Level 05 — South-west anchor",
     brief:
-      "You don't have to measure from the top-left. <code>right</code> and <code>bottom</code> anchor from the other edges — often cleaner. Reach the mark near the bottom-left corner.",
+      "Reach the bottom-left target using <code>position: absolute</code>, <code>bottom</code> and <code>left</code>.",
     target: "left:8%; bottom:10%;",
     heroBase: "",
     deco: '<div class="crate" style="left:44%;top:38%;width:120px;height:120px;z-index:5;">CRATE</div>',
-    start: "/* position: absolute; then bottom: ... left: ... */\n",
+    start: "/* Try bottom: ...; left: ...; */\n",
     hint: "position: absolute;\nleft: 8%; bottom: 10%;",
   },
   {
-    name: "Draft 06 — Above the crate",
+    name: "Level 06 — Above the crate",
     brief:
-      "A crate sits over the mark. <code>z-index</code> controls stacking order — but only on <em>positioned</em> elements. The crate is z-index 5. Get on the mark <em>and</em> paint above it.",
+      "Cover MARK above the crate. Position YOU and set <code>z-index</code> higher than 5.",
     target: "left:42%; top:42%;",
     heroBase: "",
     deco: '<div class="crate" style="left:calc(42% - 34px);top:calc(42% - 34px);width:120px;height:120px;z-index:5;">CRATE · Z 5</div>',
-    start: "/* position + coordinates + z-index above 5 */\n",
+    start: "/* Position YOU, then set z-index above 5. */\n",
     hint: "position: absolute;\nleft: 42%; top: 42%;\nz-index: 6;",
     zAbove: 5,
   },
   {
-    name: "Draft 07 — Hide the courier",
+    name: "Level 07 — Hide the courier",
     brief:
-      "Now the opposite: slip the hero <em>behind</em> the crate so the guard can't see it. It starts at z-index 9 — drop it below 5 while overlapping the crate.",
+      "Move YOU behind the crate onto MARK. Set <code>z-index</code> below 5.",
     target: "left:calc(28% + 34px); top:calc(28% + 34px);",
     heroBase: "#hero{position:relative;z-index:9;margin-left:18%;margin-top:120px;}",
     deco: '<div class="crate" style="left:28%;top:28%;width:120px;height:120px;z-index:5;">CRATE · Z 5</div>',
-    start: "/* You start at z-index 9 (positioned).\n   Go behind the crate. */\n",
+    start: "/* Set z-index below 5, then move to MARK. */\n",
     hint: "z-index: 4;\nleft: ~14%; top: ~-80px;  (position: relative; — you already have it)",
     zBelow: 5,
   },
   {
-    name: "Draft 08 — Off the board",
+    name: "Level 08 — Off the board",
     brief:
-      "The mark has left the board — it's pinned to your <em>viewport</em>, bottom-right. That's <code>position: fixed</code>: anchored to the screen, ignoring all scrolling. Chase it out of the drafting board.",
+      "Reach the screen’s bottom-right target with <code>position: fixed</code>.",
     target: "position:fixed; right:24px; bottom:24px;",
     heroBase: "",
     deco: "",
-    start: "/* position: fixed; anchors to the viewport,\n   not the board. Escape! */\n",
+    start: "/* Try position: fixed; right: ...; bottom: ...; */\n",
     hint: "position: fixed;\nright: 24px; bottom: 24px;",
   },
   {
-    name: "Draft 09 — Halfway out",
+    name: "Level 09 — Halfway out",
     brief:
-      "The mark straddles the top edge of the board — half of it is outside. Negative offsets and <code>calc()</code> are your tools. A box may absolutely sit outside its containing block.",
+      "Center YOU across the board’s top edge. Use <code>position: absolute</code>, a negative <code>top</code> and <code>calc()</code>.",
     target: "left:calc(50% - 26px); top:-26px;",
     heroBase: "",
     deco: '<div class="crate" style="left:16%;bottom:12%;width:90px;height:90px;">CRATE</div><div class="crate" style="right:14%;bottom:18%;width:90px;height:90px;">CRATE</div>',
-    start: "/* position: absolute; top: -...; left: calc(50% - ...) */\n",
+    start: "/* Try a negative top and left: calc(...); */\n",
     hint: "position: absolute;\ntop: -26px; left: calc(50% - 26px);",
   },
   {
-    name: "Draft 10 — The beacon",
+    name: "Level 10 — The beacon",
     brief:
-      "Final draft. The mark is the beacon at the exact centre of your <em>screen</em> — fixed positioning again, this time centred with <code>inset: 0; margin: auto</code>. Match it. Get certified.",
+      "Center YOU on the screen with <code>position: fixed</code>, <code>inset</code> and <code>margin</code>.",
     target: "position:fixed; inset:0; margin:auto;",
     heroBase: "",
     deco: '<div class="crate" style="left:12%;top:16%;width:110px;height:110px;">CRATE</div><div class="crate" style="right:10%;top:24%;width:110px;height:110px;">CRATE</div><div class="crate" style="left:24%;bottom:14%;width:110px;height:110px;">CRATE</div>',
-    start: "/* The last one. position: fixed; inset: 0; margin: auto;\n   — or 50% + transform: translate(-50%, -50%) */\n",
+    start: "/* Try position: fixed; inset: 0; margin: auto; */\n",
     hint: "position: fixed;\ninset: 0; margin: auto;",
   },
 ];
@@ -185,7 +185,6 @@ function loadLevel(i) {
   const lv = LEVELS[i];
   $("#lv-name").textContent = lv.name;
   $("#lv-brief").innerHTML = lv.brief;
-  $("#sheet-no").textContent = String(i + 1).padStart(2, "0") + " / " + LEVELS.length;
   levelStyle.textContent = lv.heroBase;
   target.style.cssText = lv.target;
   deco.innerHTML = lv.deco;
@@ -254,7 +253,7 @@ function check() {
   }
   renderChips();
   renderProgress();
-  announcement.textContent = "Draft " + (current + 1) + " approved in " + edits + " " + (edits === 1 ? "edit" : "edits") + ".";
+  announcement.textContent = "Level " + (current + 1) + " approved in " + edits + " " + (edits === 1 ? "edit" : "edits") + ".";
   $("#win-sub").textContent =
     current === LEVELS.length - 1
       ? "All 10 drafts cleared — you're a certified positioner."
@@ -265,7 +264,7 @@ function check() {
     (edits <= 6 ? " — first-draft quality." : edits <= 15 ? " — solid drafting." : " — the foreman has seen smoother.");
   chime();
   confetti();
-  $("#next-btn").textContent = current === LEVELS.length - 1 ? "Play again ↺" : "Next draft →";
+  $("#next-btn").textContent = current === LEVELS.length - 1 ? "Play again ↺" : "Next level →";
   confetti();
 }
 
@@ -365,3 +364,5 @@ $("#clear-progress-btn").addEventListener("click", () => {
 $("#mute-btn").textContent = muted() ? "🔇 Sound off" : "🔊 Sound on";
 loadLevel(Math.min(unlockedMax(), LEVELS.length - 1));
 renderProgress();
+
+$("#help-btn").addEventListener("click", () => $("#help").showModal());
